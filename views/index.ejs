@@ -1,0 +1,61 @@
+    <!-- big black area with big words as well as a couple of quick satisfaction buttons -->
+
+    <div style="background-color:black;">
+    <center>
+    <div style="color:white;font-size:300%" >Dekko provides augmented reality</div>
+    <div style="color:white;font-size:300%" > that your customers will actually use</div>
+    </center>
+    <center>
+    <br/>
+    <div style="align:middle">
+    <div style="float:left;width:20px;vertical-align:middle">&nbsp;</div>
+    <div style="float:left;width:270px;padding:3em 0 1em 0;text-align:center;height:80px;vertical-align:middle;background-color:#d0d0d0;border:1px solid black"><h2><a href="benefits/works_anywhere">Works Anywhere</a></h2></div>
+    <div style="float:left;width:320px;padding:3em 0 1em 0;text-align:center;height:80px;vertical-align:middle;background-color:#d0d0d0;border:1px solid black"><h2><a href="benefits/natural_interaction">Natural Interaction</a></h2></div>
+    <div style="float:left;width:260px;padding:3em 0 1em 0;text-align:center;height:80px;vertical-align:middle;background-color:#d0d0d0;border:1px solid black"><h2><a href="benefits/cloud_platform">Cloud Platform</a></h2></div>
+    </div>
+    <div style="clear:both;"></div>
+    </center>
+    <center>
+    <div style="color:black;font-size:300%" >Try it</div>
+    <span style="color:white;font-size:200%;border:3px solid red" ><a href="get_the_app">[Get the App]</a></span>
+    <span style="color:white;font-size:200%;border:3px solid red" ><a href="profile/signin">[Download Tools]</a></span>
+    </center>
+    <br/>
+    </div>
+
+    <!-- some kind of video and pull quotes -->
+    <center><div style="color:black;font-size:300%" >See what people have to say</div></center>
+
+    <div id="phone-video-container" class="inside" style="display:block;height:440px">
+    <div id="video-container"> <div id="videoDiv"></div> </div>
+    <div id="phone"> <img src="http://www.dekko.co/wp-content/themes/dekko/images/phone.png" alt="" /> </div>
+    </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+    <script>
+    var params = { allowScriptAccess: "always", autohide: 0, wmode: 'transparent'};
+    var atts = { id: "myytplayer", autohide: 0};
+    swfobject.embedSWF("http://www.youtube.com//v/ejvuwEFr87A?controls=0&showinfo=0&enablejsapi=1&playerapiid=ytplayer&version=3&rel=0", "videoDiv", "500", "330", "8", null, null, params, atts);
+    var player;
+    function onYouTubePlayerReady(playerId) { player = document.getElementById("myytplayer"); }
+    </script>
+
+    <%- partial('benefits/benefits') %>
+
+    <br/>
+    <br/>
+
+    <!-- Developer Program -->
+    <center><div style="color:black;font-size:300%" >Please <a href="profile/signin">sign up</a> for our Developer Program</div></center>
+    <center>
+    <h2><a href="developer_program">Developer Program</a></h2>
+    </center>
+    <br/>
+    <br/>
+    <br/>
+
+    <!-- Try it -->
+    <center>
+    <div style="color:black;font-size:300%" >Try it</div>
+    <span style="color:white;font-size:200%;border:3px solid red" ><a href="get_the_app">[Get the App]</a></span>
+    <span style="color:white;font-size:200%;border:3px solid red" ><a href="profile/signin">[Download Tools]</a></span>
+    </center>
