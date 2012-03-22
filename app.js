@@ -126,52 +126,66 @@ function validateEmail(email) { // hacksparrow.com/javascript-email-validation.h
 // routes for session and profile signup, signin and management overall for developers and session playing clients
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+var error_message_noauth = 'I did not get enough information to help you - perhaps you need to recover a lost pasword given your email?';
+var error_message_2 = 'Sign-on internal error #2';
+var error_message_3 = 'Sign-on internal error #3';
+var error_message_client_login = 'Client internal error #3';
+
 app.get('/signin', function(req,res) { res.render('profile/signin.ejs', get_state(req,res) ) });
 app.get('/profile/signin', function(req,res) { res.render('profile/signin.ejs', get_state(req,res) ) });
 
 app.post('/profile/signin', function(req,res) {
+
   // TODO password recovery is needed
   // TODO javascript client side dynamic validation of email would be nice too as well as error checking client side
+  // TODO sanitize
 
   var post = req.body;
   var email = post.email;
   var password = post.password;
 
+  if (!email || !password || !validateEmail(email)) { res.send(error_message_noauth); return; }
+
+  email = sanitize(email).xss();
+  password = sanitize(password).xss();
   //var salt = 'salty sardines'; // bcrypt.gen_salt_sync(10);
   //var hash = bcrypt.encrypt_sync(password, salt);
   var hash = password; // TODO BAD! we MUST salt and hash
 
-  if (!email || !password || !validateEmail(email)) {
-    res.send('I did not get enough information to help you - perhaps you need to recover a lost pasword given your email?');
-  } else {
-    mongo.find_one_by({ "email":email},function(error,results) {
-      if(error) {
-        res.send('there was an error');
-      } else if(!results) {
-        var created_at = new Date();
-        var updated_at = new Date();
-        var devkey = crypto.createHash('md5').update(email).digest("hex");
-        var data = { kind: "developer", devkey: devkey, email: email, password: hash, created_at: created_at, updated_at: updated_at };
-        mongo.save( data, function( error, results) {
-          if(error) {
-            res.send("problem saving user");
-          } else {
-            req.session.user_id = email;
-            req.session.devkey = devkey;
-            res.redirect('/profile');
-          }
-       });
-     } else {
-       if(results["password"] == hash) { // if(bcrypt.compare_sync(results["password"],hash)) {
-         req.session.user_id = results["email"];
-         req.session.devkey = results["devkey"];
-         res.redirect('/profile');
-       } else {
-          res.send("I'm sorry I could not find your information");
-       }
-     }
-    });
-  }
+
+  console.log("signin: looking for " + email );
+  mongo.find_one_by({ "email":email},function(error,results) {
+    if(error) { res.send(error_message_2); return; }
+    if(!results) {
+      console.log("signin: adding new ");
+      var created_at = new Date();
+      var updated_at = new Date();
+      var devkey = crypto.createHash('md5').update(email).digest("hex");
+      var data = { kind: "developer", devkey: devkey, email: email, password: hash, created_at: created_at, updated_at: updated_at };
+      console.log("signin: saving " + data );
+      mongo.save( data, function( error, results) {
+        console.log("signin: saved user");
+        if(error) { res.send(error_message_3); return; }
+        console.log("signin: saved user");
+        req.session.user_id = email;
+        req.session.devkey = devkey;
+        res.redirect('/profile');
+      });
+      console.log("done saving");
+      return;
+    }
+    if(results["password"] == hash) { // if(bcrypt.compare_sync(results["password"],hash)) {
+      req.session.user_id = results["email"];
+      req.session.devkey = results["devkey"];
+      res.redirect('/profile');
+      return;
+    } else {
+      res.send(error_message_noauth);
+      return;
+    }
+    return;
+  });
+  console.log("signin: should not get here");
 });
 
 app.get('/profile/signout', function(req,res) {
@@ -179,6 +193,17 @@ app.get('/profile/signout', function(req,res) {
   res.redirect("/");
   // res.render('profile/signout.ejs', get_state(req,res));
 });
+
+function randomString() {
+    var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+    var string_length = 32;
+    var randomstring = '';
+    for (var i=0; i<string_length; i++) {
+        var rnum = Math.floor(Math.random() * chars.length);
+        randomstring += chars.substring(rnum,rnum+1);
+    }
+    return randomstring;
+}
 
 app.get('/profile/session', function(req,res) {
 
@@ -211,7 +236,8 @@ app.get('/profile/session', function(req,res) {
     req.session.user_id = results["email"];
     req.session.devkey = d;
 
-    var sessionkey = crypto.createHash('md5').digest("hex");
+    var r = randomString();
+    var sessionkey = crypto.createHash('md5').update(r).digest("hex");
     var created_at = new Date();
     var updated_at = new Date();
 
@@ -222,7 +248,7 @@ app.get('/profile/session', function(req,res) {
 
     // also remember the client if needed
     mongo.find_one_by({ kind:"client", clientkey: c, devkey: d, udid: u },function(error,results) {
-      if(error) return;
+      if(error) return; // cannot reply now since res.send is done
       if(!results) {
          var data = { kind:"client", clientkey: c, devkey: d, udid: u, created_at: created_at, updated_at: updated_at };
          mongo.save( data, null);

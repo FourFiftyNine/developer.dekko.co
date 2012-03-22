@@ -67,7 +67,7 @@ MongoDB.prototype.find_one_by = function(hash,callback) {
 MongoDB.prototype.save = function(blobs, callback) {
   if( typeof(blobs.length)=="undefined") blobs = [blobs];
   this.getCollection(function(error, mycollection) {
-    if( error ) if(callback) callback(error)
+    if( error ) { if(callback) callback(error,null); }
     else {
       mycollection.insert(blobs, function() { if(callback) callback(null, blobs); });
     }
