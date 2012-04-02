@@ -205,6 +205,32 @@ function randomString() {
     return randomstring;
 }
 
+
+//
+//  server ping alive test
+//
+
+app.get('/profile/ping', function(req,res) {
+
+  var d = req.query["d"];
+  var c = req.query["c"];
+
+  // tidy up dat 
+  if(!d) { res.send("error: profile/session bad key " + d, 404 ); return; }
+  if(!c) c = "anonymous";
+  d = d.toLowerCase();
+//  d = sanitize().xss(); // TODO ugh? can this break????
+
+  // look up developer
+  mongo.find_one_by({kind:"developer","devkey":d},function(error,results) {
+
+    if(error || !results) { res.send("error: profile/session no key " + d,404 ); return; }
+
+    res.send("pong");
+  });
+
+});
+
 app.get('/profile/session', function(req,res) {
 
   // remote client unauthenticated callers can call this to get a client session key; this is intended to associate a given remote client with a given developer
