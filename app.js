@@ -366,4 +366,5 @@ app.get('/benefits/works_anywhere', function(req,res) { res.render('benefits/wor
 app.get('/benefits/natural_interaction', function(req,res) { res.render('benefits/natural_interaction', get_state(req,res)) });
 app.get('/benefits/cloud_platform', function(req,res) { res.render('benefits/cloud_platform', get_state(req,res)) });
 
+app.get('/features', function(req,res) { res.render('features', get_state(req,res) ); });
 app.get('/', function(req,res) { res.render('index', get_state(req,res) ); });
