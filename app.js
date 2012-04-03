@@ -3,37 +3,56 @@
 // node.js expressjs app for dekko developer and user session management
 //////////////////////////////////////////////////////////////////////////////////
 
-var express = require('express');
-var ejs = require('ejs');
-var routes = require('./routes');
-var MongoDB = require('./mongo').MongoDB;
-var crypto = require('crypto');
-var bcrypt = require('bcrypt');
-var check = require('validator').check;
+var express  = require('express');
+// var ejs   = require('ejs');
+var jade     = require('jade');
+var stylus   = require('stylus');
+var nib      = require('nib'); // CSS3 mixin library
+var S        = require('string'); // Utility Class http://stringjs.com/
+var routes   = require('./routes');
+var MongoDB  = require('./mongo').MongoDB;
+var crypto   = require('crypto');
+var bcrypt   = require('bcrypt');
+var check    = require('validator').check;
 var sanitize = require('validator').sanitize;
 
 // var passport = require('passport') , LocalStrategy = require('passport-local').Strategy;
 
 var app = module.exports = express.createServer();
 
-app.configure(function(){
+app.configure(function() {
   app.set('views', __dirname + '/views');
-  app.set('view engine', 'ejs');
+  app.set('view engine', 'jade');
   app.use(express.bodyParser());
   app.use(express.cookieParser());
   app.use(express.session({ secret: "dekko world" }));
   // app.use(passport.initialize());
   // app.use(passport.session());
   app.use(express.methodOverride());
+
+  function compile(str, path) {
+    return stylus(str)
+      .use(nib())
+      .import('nib');
+  }
+
+  app.use(require('stylus').middleware({
+      src: __dirname + '/views',
+      dest: __dirname + '/public',
+      debug: true,
+      linenos: true,
+      compile: compile
+  }));
+
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
 });
 
-app.configure('development', function(){
+app.configure('development', function() {
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
-app.configure('production', function(){
+app.configure('production', function() {
   app.use(express.errorHandler());
 });
 
@@ -73,19 +92,28 @@ passport.deserializeUser(function(id, done) {
 //////////////////////////////////////////////////////////////////////////////////
 
 app.listen(8002);
+console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 
 //////////////////////////////////////////////////////////////////////////////////
 // Page handling
 ///////////////.//////////////////////////////////////////////////////////////////
 
 function get_state(req,res) {
+  // console.log(req);
+  // This seems to act as a before render dispatch - in any case need to have a way to set the title via the res.render() method
+  
+  // View variable object - keeps them out of global namespace
+  var locals = {
+    body_class: (req.route.path === '/') ? 'home' : S(req.route.path).replaceAll('/', ' ').ltrim().s
+  }
+  // console.log(S('/docs/unity_reference').dasherize().s);
   // TODO
   // i am not happy with this callback approach to setting state
   // i think a better way is to have a function we call for all render requests and pass it a hash; so we can tack on special variables
   if(req.session.user_id) {
     return { user_id: req.session.user_id, devkey: req.session.devkey };
   }
-  return { user_id: null, devkey: null };
+  return { user_id: null, devkey: null, locals: locals };
 }
 
 // test json
@@ -96,7 +124,7 @@ app.get('/json0', function(req, res){
 
 app.get('/json1/:id', function(req, res) {
   mongo.find_one_by_id(req.params.id, function(error, developer) {
-    res.render('json.ejs', { locals: { developer:developer } });
+    res.render('json', { locals: { developer:developer } });
   });
 });
 
@@ -131,8 +159,8 @@ var error_message_2 = 'Sign-on internal error #2';
 var error_message_3 = 'Sign-on internal error #3';
 var error_message_client_login = 'Client internal error #3';
 
-app.get('/signin', function(req,res) { res.render('profile/signin.ejs', get_state(req,res) ) });
-app.get('/profile/signin', function(req,res) { res.render('profile/signin.ejs', get_state(req,res) ) });
+app.get('/signin', function(req,res) { res.render('profile/signin', get_state(req,res) ) });
+app.get('/profile/signin', function(req,res) { res.render('profile/signin', get_state(req,res) ) });
 
 app.post('/profile/signin', function(req,res) {
 
@@ -191,7 +219,7 @@ app.post('/profile/signin', function(req,res) {
 app.get('/profile/signout', function(req,res) {
   req.session.destroy(); // // delete res.session.user_id;
   res.redirect("/");
-  // res.render('profile/signout.ejs', get_state(req,res));
+  // res.render('profile/signout', get_state(req,res));
 });
 
 function randomString() {
@@ -287,11 +315,11 @@ app.get('/profile/session', function(req,res) {
 
 });
 
-app.get('/profile', check_auth, function(req,res) { res.render('profile/profile.ejs', get_state(req,res) ) });
-app.get('/profile/edit', check_auth, function(req,res) { res.render('profile/edit.ejs', get_state(req,res) ) });
-app.get('/profile/resign', check_auth, function(req,res) { res.render('profile/resign.ejs', get_state(req,res) ) });
-app.get('/profile/analytics', check_auth, function(req,res) { res.render('profile/analytics.ejs', get_state(req,res) ) });
-app.get('/profile/unitypackage', check_auth, function(req,res) { res.render('profile/unitypackage.ejs', get_state(req,res) ) });
+app.get('/profile', check_auth, function(req,res) { res.render('profile/profile', get_state(req,res) ) });
+app.get('/profile/edit', check_auth, function(req,res) { res.render('profile/edit', get_state(req,res) ) });
+app.get('/profile/resign', check_auth, function(req,res) { res.render('profile/resign', get_state(req,res) ) });
+app.get('/profile/analytics', check_auth, function(req,res) { res.render('profile/analytics', get_state(req,res) ) });
+app.get('/profile/unitypackage', check_auth, function(req,res) { res.render('profile/unitypackage', get_state(req,res) ) });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // admin
@@ -302,7 +330,7 @@ app.get('/admin', function(req,res) {
   mongo.find_all(function(error,results) {
     if(error) {
     } else {
-      res.render('admin.ejs', { "results": results } );
+      res.render('admin', { "results": results } );
     }
   });
 
@@ -312,30 +340,30 @@ app.get('/admin', function(req,res) {
 // docs
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-app.get('/tools', function(req,res) { res.render('tools.ejs', get_state(req,res) ) });
-app.get('/docs', function(req,res) { res.render('docs.ejs', get_state(req,res) ) });
-app.get('/docs/unity', function(req,res) { res.render('docs/unity.ejs', get_state(req,res) ) });
-app.get('/docs/unity_tutorial', function(req,res) { res.render('docs/unity_tutorial.ejs', get_state(req,res) ) });
-app.get('/docs/unity_reference', function(req,res) { res.render('docs/unity_reference.ejs', get_state(req,res) ) });
-app.get('/docs/sdk', function(req,res) { res.render('docs/sdk.ejs', get_state(req,res) ) });
-app.get('/docs/sdk_tutorial', function(req,res) { res.render('docs/sdk_tutorial.ejs', get_state(req,res) ) });
-app.get('/docs/sdk_reference', function(req,res) { res.render('docs/sdk_reference.ejs', get_state(req,res) ) });
-app.get('/docs/api', function(req,res) { res.render('docs/api.ejs', get_state(req,res) ) });
-app.get('/docs/api_tutorial', function(req,res) { res.render('docs/api_tutorial.ejs', get_state(req,res) ) });
-app.get('/docs/api_reference', function(req,res) { res.render('docs/api_reference.ejs', get_state(req,res) ) });
+app.get('/tools', function(req,res) { res.render('tools', get_state(req,res) ) });
+app.get('/docs', function(req,res) { res.render('docs', get_state(req,res) ) });
+app.get('/docs/unity', function(req,res) { res.render('docs/unity', get_state(req,res, 'Documentation - Unity') ) });
+app.get('/docs/unity_tutorial', function(req,res) { res.render('docs/unity_tutorial', get_state(req,res, 'Documentation - Unity Tutorial') ) });
+app.get('/docs/unity_reference', function(req,res) { res.render('docs/unity_reference', get_state(req,res) ) });
+app.get('/docs/sdk', function(req,res) { res.render('docs/sdk', get_state(req,res) ) });
+app.get('/docs/sdk_tutorial', function(req,res) { res.render('docs/sdk_tutorial', get_state(req,res) ) });
+app.get('/docs/sdk_reference', function(req,res) { res.render('docs/sdk_reference', get_state(req,res) ) });
+app.get('/docs/api', function(req,res) { res.render('docs/api', get_state(req,res) ) });
+app.get('/docs/api_tutorial', function(req,res) { res.render('docs/api_tutorial', get_state(req,res) ) });
+app.get('/docs/api_reference', function(req,res) { res.render('docs/api_reference', get_state(req,res) ) });
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // other
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-app.get('/support', function(req,res) { res.render('support.ejs', get_state(req,res) ) });
-app.get('/get_the_app', function(req,res) { res.render('get_the_app.ejs', get_state(req,res) ) });
-app.get('/developer_program', function(req,res) { res.render('developer_program.ejs', get_state(req,res) ) });
+app.get('/support', function(req,res) { res.render('support', get_state(req,res) ) });
+app.get('/get_the_app', function(req,res) { res.render('get_the_app', get_state(req,res) ) });
+app.get('/developer_program', function(req,res) { res.render('developer_program', get_state(req,res) ) });
 
-app.get('/benefits', function(req,res) { res.render('benefits/benefits.ejs', get_state(req,res) ) });
-app.get('/benefits/works_anywhere', function(req,res) { res.render('benefits/works_anywhere.ejs', get_state(req,res) ) });
-app.get('/benefits/natural_interaction', function(req,res) { res.render('benefits/natural_interaction.ejs', get_state(req,res)) });
-app.get('/benefits/cloud_platform', function(req,res) { res.render('benefits/cloud_platform.ejs', get_state(req,res)) });
+app.get('/benefits', function(req,res) { res.render('benefits/benefits', get_state(req,res) ) });
+app.get('/benefits/works_anywhere', function(req,res) { res.render('benefits/works_anywhere', get_state(req,res) ) });
+app.get('/benefits/natural_interaction', function(req,res) { res.render('benefits/natural_interaction', get_state(req,res)) });
+app.get('/benefits/cloud_platform', function(req,res) { res.render('benefits/cloud_platform', get_state(req,res)) });
 
-app.get('/', function(req,res) { res.render('index.ejs', get_state(req,res) ); });
+app.get('/', function(req,res) { res.render('index', get_state(req,res) ); });
