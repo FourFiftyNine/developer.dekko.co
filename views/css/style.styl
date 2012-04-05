@@ -18,7 +18,7 @@ html
   -ms-text-size-adjust: 100%
 
 html, button, input, select, textarea
-  font-family: sans-serif
+  font-family: Uni-Sans-Regular, Verdana, sans-serif
   color: #222
 
 body
@@ -211,6 +211,7 @@ green      = #7ba845
 dark_grey  = #464646
 light_grey = #dfdfdf
 yellow     = #fbf4ec
+red        = #c84637
 
 ::-moz-selection
   background: green
@@ -234,6 +235,14 @@ h1
   text-transform: uppercase
   font-size: 30px
   margin: 0
+body
+  color: #464646
+  font-family: Uni-Sans-Regular, Verdana, sans-serif
+  &.login
+  &.signup
+   h1
+    color: black
+    font-family: 'Uni-Sans-Regular'
 h2
   font-family: 'Uni-Sans-Book'
   font-size: 28px
@@ -242,7 +251,11 @@ h3
   font-family: 'Uni-Sans-Bold'
   font-size: 18px
   margin: 25px 0 0
-// Links
+h4
+  @extend h3
+  font-size: 14px
+
+//// Links
 a,a:visited
   color: green
   text-decoration: none
@@ -253,13 +266,82 @@ a:active
   position relative
   top 1px
 
-//// Layout
+//// inputs
+.field
+  margin-bottom: 35px
+  position: relative
+  label
+    display: inline-block
+  &.input
+    label
+      width: 80px
+      margin-right: 10px
+      text-align: right
+  &.checkbox
+    margin-top: 70px
+    label
+      color: black
+      margin-left: 10px
+
+input
+  &[type="text"]
+  &[type="email"]
+  &[type="password"]
+    background: #ffffff
+    border: 1px solid #b2b2b2
+    border-radius: 6px
+    height: 27px
+    line-height: 26px
+    outline: none
+    padding: 0 5px
+    box-shadow: 0px 1px 3px 0 rgba(0,0,0, .6) inset
+    width: 310px
+  &.invalid-input
+    border-color: red
+  &:focus
+    border-color: green
+  &[type="submit"]
+  &[type="checkbox"]
+    margin-left: 90px // label width + margin
+
+
+
+
+
+////// inputs > Errors (Validation)
+.error-message
+  color: red
+  position: absolute
+  left: 90px // label width + margin
+  top: 35px // input box + spacing
+
+////// inputs > button styles
+
+.btn
+  background: linear-gradient(top, #6f6f6f, #474747)
+  border: 1px solid #6f6f6f
+  border-radius: 6px
+  color: #f0f0f0
+  font-size: 18px
+  height: 30px
+  line-height: 26px
+  padding: 0 30px
+  text-shadow: 0 1px 1px black
+  text-transform: lowercase
+  &:hover
+    box-shadow: 1px 1px 2px rgba(0,0,0, .4)
+    background: linear-gradient(top, lighten(#6f6f6f, 10), lighten(#474747, 10))
+  &:active
+    position: relative
+    top: 1px
+
+
+//// layout
 body
   background: url(/images/background.png) repeat
-  color: #464646
-  font-family: Uni-Sans-Regular, Verdana, sans-serif
 
-////// General padding and structure (excludes home)
+
+////// layout > General padding and structure (home gets separate styles)
 .container
   margin 0 auto
   width 1000px
@@ -281,11 +363,13 @@ body
       p
         margin-top: 5px
     aside#sidebar
-      background-color: yellow
       border-radius: top right 8px
       float: right
       padding: 70px 30px 0
       width: 245px
+      p,h3
+        &:first-child
+          margin-top: 0
     .sign-up
       position: absolute
       top: 15px;
@@ -302,7 +386,6 @@ header#main-header
     a,a:visited
       color: #464646
       display: block
-      font-family: Uni-Sans-Regular
       font-size: 18px
       margin: 0 15px
       text-decoration: none
@@ -355,8 +438,15 @@ body.home
           width: 205px
           z-index: 3
 
-
-
+//// Login
+body.login
+  #sidebar
+    background: white
+  #content
+    background: white
+    form#login
+      margin-left: 60px
+      margin-top: 45px
 // End App Styles
 
 @media only screen and (min-width: 35em)

@@ -1,0 +1,24 @@
+-locals.title = 'Login'
+article
+  h1 Login
+
+  form(method="post", id="login", action="/profile/login")
+    .field.input
+      label(for="email") Your Email
+      input(type="email", name="email", id="email")
+    .field.input
+      label(for="password") Password
+      input(type="password", name="password", id="password", class="invalid-input")
+      .error-message Invalid Password
+    .field.checkbox
+      input(type="checkbox", name="remember", id="remember", value="test")
+      label(for="remember") Remember my email on this computer
+
+    input(type="submit", value="login", class="btn")
+
+aside#sidebar
+  h3 Don't have an account?
+  a(title="Sign-up now!", href="/signup") Sign-up now!
+
+  h3 Did you forget your password?
+  a(title="Download 1", href="/recover") Recover it here.
