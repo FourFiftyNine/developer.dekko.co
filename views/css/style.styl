@@ -367,6 +367,8 @@ body
   &#main
     header#main-header
       margin: 20px 0
+      .logo
+        float: left
   #content
     background: url(/images/bg-content.png) repeat #ffffff
     clear: both
@@ -495,6 +497,39 @@ body.features
         &.cloud-platform
           .icon
             background-position: -175px 0
+
+//// [page] 404 //TODO update once error handling is done
+body.error-404
+  #content
+    background: white
+    article
+      height: 390px
+      padding: 120px 100px 50px 130px
+      position: relative
+      .background
+        position: absolute
+      .message
+        color: #464646
+        font-size: 17px
+        line-height: 21px
+        position: relative
+        top: 160px
+        left: 8px
+      a.go-home,
+      a.go-home:visited
+        color: #464646
+        display: block
+        position: relative
+        top: 180px
+        left: -10px
+        font-family: Uni-Sans-SemiBold
+        font-size: 17px
+        height: 25px
+        line-height: 26px
+        padding-left: 30px
+        background: url(/images/go-home-arrow.jpg) no-repeat left 0px
+      
+  
 // End App Styles
 
 @media only screen and (min-width: 35em)

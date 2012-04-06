@@ -16,19 +16,19 @@ html(class='no-js', lang='en')
     meta(name='description', content='')
     
     meta(name='viewport', content='width=device-width; initial-scale=.8; maximum-scale=1.0;')
-    
+
+    link(rel='shortcut icon', href='/favicon.ico')
+    link(rel='apple-touch-icon', href='/apple-touch-icon.png')
     link(rel='stylesheet', href='/fonts/sugar_pie/sugar_pie.css')
     link(rel='stylesheet', href='/fonts/uni_sans/uni_sans.css')
     link(rel='stylesheet', href='/css/style.css')
-
-    link(rel='apple-touch-icon', href='/apple-touch-icon.png')
-    
+   
     script(src='js/libs/modernizr-2.5.3.min.js')
 
   body(class="#{locals.body_class}")
     .container#main
         header#main-header.clearfix(role='banner')
-          a(href='/', title='Dekko Developers')
+          a.logo(href='/', title='Dekko Developers')
             img(src='/images/logo.png', width="283", height="135") 
           nav.horiz
             ul.menu
