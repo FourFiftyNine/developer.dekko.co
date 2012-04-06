@@ -44,7 +44,7 @@ html(class='no-js', lang='en')
           != body
           a.sign-up(title="Sign Up", href="/sign-up")
             img(src="/images/btn-sign-up.png")
-        - if (locals.body_class)
+        - if (locals.body_class == 'home')
           footer#news.container
             img(src="/images/temp-news.png")
             span#show-footer In the news
