@@ -13,7 +13,7 @@ jQuery(document).ready(function($) {
     $('#show-footer').click(function() {
         $("footer#news").animate({
             marginTop: "-10px"
-        }, 1000, 'easeOutBounce')
+        }, 1000, 'easeOutCubic')
     })
     
 });
