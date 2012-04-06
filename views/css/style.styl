@@ -274,7 +274,7 @@ a:active
     display: inline-block
   &.input
     label
-      width: 80px
+      width: 135px
       margin-right: 10px
       text-align: right
   &.checkbox
@@ -297,12 +297,14 @@ input
     box-shadow: 0px 1px 3px 0 rgba(0,0,0, .6) inset
     width: 310px
   &.invalid-input
+    border-width: 2px
     border-color: red
   &:focus
     border-color: green
+    box-shadow: 0px 1px 3px 0 rgba(0,0,0, .6) inset
   &[type="submit"]
   &[type="checkbox"]
-    margin-left: 90px // label width + margin
+    margin-left: 145px // label width + margin
 
 
 
@@ -312,7 +314,7 @@ input
 .error-message
   color: red
   position: absolute
-  left: 90px // label width + margin
+  left: 145px // label width + margin
   top: 35px // input box + spacing
 
 ////// inputs > button styles
@@ -365,7 +367,7 @@ body
     aside#sidebar
       border-radius: top right 8px
       float: right
-      padding: 70px 30px 0
+      padding: 70px 30px 70px
       width: 245px
       p,h3
         &:first-child
@@ -438,15 +440,24 @@ body.home
           width: 205px
           z-index: 3
 
-//// Login
-body.login
-  #sidebar
-    background: white
-  #content
-    background: white
-    form#login
-      margin-left: 60px
-      margin-top: 45px
+//// Forms
+form#login,
+form#signup,
+form#recover
+  margin-top: 45px
+
+form#recover
+  label,
+  input
+    margin-left: 55px
+  label
+    display: block
+    margin-bottom: 5px
+    text-align: left
+    width: 400px
+  .error-message
+    left: 55px
+    top: 60px
 // End App Styles
 
 @media only screen and (min-width: 35em)

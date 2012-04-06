@@ -155,18 +155,28 @@ function validateEmail(email) { // hacksparrow.com/javascript-email-validation.h
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// routes for session and profile signup, login and management overall for developers and session playing clients
+// routes for session and profile sign-up, login and management overall for developers and session playing clients
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// login routes
+app.get('/login', function(req,res) { res.render('profile/login', get_state(req,res) ) });
+app.get('/profile/login', function(req,res) { res.render('profile/login', get_state(req,res) ) });
+
+// recover password routes
+
+app.get('/recover', function(req,res) { res.render('profile/recover', get_state(req,res) ) });
+app.get('/profile/recover', function(req,res) { res.render('profile/recover', get_state(req,res) ) });
 
 var error_message_noauth = 'I did not get enough information to help you - perhaps you need to recover a lost pasword given your email?';
 var error_message_2 = 'Sign-on internal error #2';
 var error_message_3 = 'Sign-on internal error #3';
 var error_message_client_login = 'Client internal error #3';
 
-app.get('/login', function(req,res) { res.render('profile/login', get_state(req,res) ) });
-app.get('/profile/login', function(req,res) { res.render('profile/login', get_state(req,res) ) });
+app.get('/sign-up', function(req,res) { res.render('profile/sign-up', get_state(req,res) ) });
+app.get('/profile/sign-up', function(req,res) { res.render('profile/sign-up', get_state(req,res) ) });
 
-app.post('/profile/login', function(req,res) {
+app.post('/profile/sign-up', function(req,res) {
 
   // TODO password recovery is needed
   // TODO javascript client side dynamic validation of email would be nice too as well as error checking client side
@@ -185,20 +195,20 @@ app.post('/profile/login', function(req,res) {
   var hash = password; // TODO BAD! we MUST salt and hash
 
 
-  console.log("login: looking for " + email );
+  console.log("sign-up: looking for " + email );
   mongo.find_one_by({ "email":email},function(error,results) {
     if(error) { res.send(error_message_2); return; }
     if(!results) {
-      console.log("login: adding new ");
+      console.log("sign-up: adding new ");
       var created_at = new Date();
       var updated_at = new Date();
       var devkey = crypto.createHash('md5').update(email).digest("hex");
       var data = { kind: "developer", devkey: devkey, email: email, password: hash, created_at: created_at, updated_at: updated_at };
-      console.log("login: saving " + data );
+      console.log("sign-up: saving " + data );
       mongo.save( data, function( error, results) {
-        console.log("login: saved user");
+        console.log("sign-up: saved user");
         if(error) { res.send(error_message_3); return; }
-        console.log("login: saved user");
+        console.log("sign-up: saved user");
         req.session.user_id = email;
         req.session.devkey = devkey;
         res.redirect('/profile');
@@ -217,7 +227,7 @@ app.post('/profile/login', function(req,res) {
     }
     return;
   });
-  console.log("login: should not get here");
+  console.log("sign-up: should not get here");
 });
 
 app.get('/profile/signout', function(req,res) {
