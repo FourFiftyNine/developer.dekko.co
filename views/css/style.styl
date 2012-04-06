@@ -354,7 +354,6 @@ input
     position: relative
     top: 1px
 
-
 //// layout
 body
   background: url(/images/background.png) repeat
@@ -375,7 +374,7 @@ body
     width: 940px
     margin-left: 60px
     position: relative
-    box-shadow: 0px 2px 5px 0 rgba(153,153,153, .8)
+    box-shadow: 0px 2px 5px 0 rgba(0,0,0,.35)
     border-radius: 8px
     > article
       padding: 60px 0 60px 60px
@@ -464,7 +463,33 @@ body.home
           padding: 0 0 0 70px
           width: 205px
           z-index: 3
-
+  footer#news
+    background-color: green;
+    box-shadow: 0px 1px 5px 0 rgba(0,0,0,.35)
+    border-radius: bottom 8px
+    height: 100px;
+    margin-top: -90px
+    margin-left: 61px;
+    position: relative
+    width: 936px;
+    img
+      margin-top: 40px
+      margin-left: 20px
+    #show-footer
+      background: green
+      border-radius: bottom 6px
+      border-top: 1px solid green
+      box-shadow: 0px 3px 4px 0 rgba(0,0,0,.35)
+      bottom: -30px;
+      right: 20px;
+      color: white
+      cursor: pointer
+      display: inline-block
+      height: 30px
+      line-height: 30px
+      padding: 0 20px 0 40px
+      position: absolute
+      text-shadow: 1px 1px 1px rgba(0,0,0,.35)
 //// [page] features  
 body.features
   .features-text
@@ -529,7 +554,16 @@ body.error-404
         padding-left: 30px
         background: url(/images/go-home-arrow.jpg) no-repeat left 0px
       
-  
+// z-index globals
+#content
+  position: relative
+  z-index: 10
+  footer#news
+    position: relative
+    z-index: 5
+    #show-footer
+      position: absolute
+      z-index: 1
 // End App Styles
 
 @media only screen and (min-width: 35em)
