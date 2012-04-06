@@ -44,15 +44,16 @@ html(class='no-js', lang='en')
           != body
           a.sign-up(title="Sign Up", href="/sign-up")
             img(src="/images/btn-sign-up.png")
-        footer#news.container
-          img(src="/images/temp-news.png")
-          span#show-footer In the news
-          //- .logo.name-1
-          //- .logo.name-2
-          //- .logo.name-3
-          //- .logo.name-4
-          //- .logo.name-5
-          //- .logo.name-6
+        - if (locals.body_class)
+          footer#news.container
+            img(src="/images/temp-news.png")
+            span#show-footer In the news
+            //- .logo.name-1
+            //- .logo.name-2
+            //- .logo.name-3
+            //- .logo.name-4
+            //- .logo.name-5
+            //- .logo.name-6
     footer#main-footer
 
     script(src='//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
