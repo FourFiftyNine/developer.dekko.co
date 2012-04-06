@@ -53,7 +53,7 @@ app.configure(function() {
 });
 
 app.configure('development', function() {
-  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+  app.use(express.errorHandler());
 });
 
 app.configure('production', function() {
@@ -107,9 +107,16 @@ function get_state(req,res) {
   // This seems to act as a before render dispatch - in any case need to have a way to set the title via the res.render() method
   
   // View variable object - keeps them out of global namespace
+
   var locals = {
     body_class: (req.route.path === '/') ? 'home' : S(req.route.path).replaceAll('/', ' ').ltrim().s
   }
+
+  // css selector cannot start with an integer
+  // TODO change up with error handling is implemented
+  if(locals.body_class == "404")
+    locals.body_class = "error-404";
+
   // console.log(S('/docs/unity_reference').dasherize().s);
   // TODO
   // i am not happy with this callback approach to setting state
@@ -382,3 +389,4 @@ app.get('/benefits/cloud_platform', function(req,res) { res.render('benefits/clo
 
 app.get('/features', function(req,res) { res.render('features', get_state(req,res) ); });
 app.get('/', function(req,res) { res.render('index', get_state(req,res) ); });
+app.get('/404', function(req, res) { res.render('404', get_state(req,res) ); });

@@ -16,19 +16,19 @@ html(class='no-js', lang='en')
     meta(name='description', content='')
     
     meta(name='viewport', content='width=device-width; initial-scale=.8; maximum-scale=1.0;')
-    
+
+    link(rel='shortcut icon', href='/favicon.ico')
+    link(rel='apple-touch-icon', href='/apple-touch-icon.png')
     link(rel='stylesheet', href='/fonts/sugar_pie/sugar_pie.css')
     link(rel='stylesheet', href='/fonts/uni_sans/uni_sans.css')
     link(rel='stylesheet', href='/css/style.css')
-
-    link(rel='apple-touch-icon', href='/apple-touch-icon.png')
-    
+   
     script(src='js/libs/modernizr-2.5.3.min.js')
 
   body(class="#{locals.body_class}")
     .container#main
         header#main-header.clearfix(role='banner')
-          a(href='/', title='Dekko Developers')
+          a.logo(href='/', title='Dekko Developers')
             img(src='/images/logo.png', width="283", height="135") 
           nav.horiz
             ul.menu
@@ -45,18 +45,22 @@ html(class='no-js', lang='en')
           a.sign-up(title="Sign Up", href="/sign-up")
             img(src="/images/btn-sign-up.png")
         footer#news.container
-          .logo.name-1
-          .logo.name-2
-          .logo.name-3
-          .logo.name-4
-          .logo.name-5
-          .logo.name-6
+          img(src="/images/temp-news.png")
+          span#show-footer In the news
+          //- .logo.name-1
+          //- .logo.name-2
+          //- .logo.name-3
+          //- .logo.name-4
+          //- .logo.name-5
+          //- .logo.name-6
     footer#main-footer
 
     script(src='//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
     script window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\\/script>')
 
-    script(defer, src='js/plugins.js')
+    script(src='js/libs/jquery.easing.1.3.js')
+
+    //- script(defer, src='js/plugins.js')
     script(defer, src='js/script.js')
 
     script
