@@ -30,7 +30,7 @@ html(class='no-js', lang='en')
         header#main-header.clearfix(role='banner')
           a(href='/', title='Dekko Developers')
             img(src='/images/logo.png', width="283", height="135") 
-          nav
+          nav.horiz
             ul.menu
               li.features
                 a(title="features", href="/features") features
@@ -41,11 +41,17 @@ html(class='no-js', lang='en')
               li.login
                 a(title="login", href="/login") login
         div(role='main', id="content").clearfix
+          != body
           a.sign-up(title="Sign Up", href="/sign-up")
             img(src="/images/btn-sign-up.png")
-          != body
-
-    footer
+        footer#news.container
+          .logo.name-1
+          .logo.name-2
+          .logo.name-3
+          .logo.name-4
+          .logo.name-5
+          .logo.name-6
+    footer#main-footer
 
     script(src='//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
     script window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\\/script>')

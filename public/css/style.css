@@ -400,9 +400,11 @@ body.signup h1 {
 h2 {
   font-family: 'Uni-Sans-Book';
   font-size: 28px;
+  margin-top: 35px;
+  margin-bottom: 10px;
 }
 
-/* line 249 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 251 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 h3,
 h4 {
   color: #464646;
@@ -411,89 +413,118 @@ h4 {
   margin: 25px 0 0;
 }
 
-/* line 254 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 256 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 h4 {
   font-size: 14px;
 }
 
-/* line 259 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 261 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 a,
 a:visited {
   color: #7ba845;
   text-decoration: none;
 }
 
-/* line 262 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 264 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 a:hover {
   color: #7ba845;
   text-decoration: underline;
 }
 
-/* line 265 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 267 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 a:active {
   position: relative;
   top: 1px;
 }
 
-/* line 270 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 272 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+form#login,
+form#signup,
+form#recover {
+  margin-top: 45px;
+}
+
+/* line 277 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+
+/* line 278 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+form#recover label,
+form#recover input {
+  margin-left: 55px;
+}
+
+/* line 281 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+form#recover label {
+  display: block;
+  margin-bottom: 5px;
+  text-align: left;
+  width: 400px;
+}
+
+/* line 286 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+form#recover .error-message {
+  left: 55px;
+  top: 60px;
+}
+
+/* line 291 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 .field {
   margin-bottom: 35px;
   position: relative;
 }
 
-/* line 273 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 294 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 .field label {
   display: inline-block;
 }
 
-/* line 275 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 296 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 
-/* line 276 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 297 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 .field.input label {
   width: 135px;
   margin-right: 10px;
   text-align: right;
 }
 
-/* line 280 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 301 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 .field.checkbox {
   margin-top: 70px;
 }
 
-/* line 282 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 303 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 .field.checkbox label {
   color: #000;
   margin-left: 10px;
 }
 
-/* line 286 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 307 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 
-/* line 287 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 308 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 input[type="text"],
 input[type="email"],
 input[type="password"] {
   background: #fff;
-  border: 1px solid #b2b2b2;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
+  border: 1px solid #b2b2b2;
+  -webkit-box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.60) inset;
+  -moz-box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.60) inset;
+  box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.60) inset;
   height: 27px;
   line-height: 26px;
   outline: none;
   padding: 0 5px;
-  -webkit-box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.60) inset;
-  -moz-box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.60) inset;
-  box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.60) inset;
   width: 310px;
 }
 
-/* line 299 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 320 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 input.invalid-input {
   border-width: 2px;
   border-color: #c84637;
 }
 
-/* line 302 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 323 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 input:focus {
   border-color: #7ba845;
   -webkit-box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.60) inset;
@@ -501,13 +532,13 @@ input:focus {
   box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.60) inset;
 }
 
-/* line 305 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 326 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 input[type="submit"],
 input[type="checkbox"] {
   margin-left: 145px;
 }
 
-/* line 314 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 331 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 .error-message {
   color: #c84637;
   position: absolute;
@@ -515,16 +546,16 @@ input[type="checkbox"] {
   top: 35px;
 }
 
-/* line 322 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 339 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 .btn {
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #6f6f6f), color-stop(1, #474747));
   background: -webkit-linear-gradient(top, #6f6f6f 0%, #474747 100%);
   background: -moz-linear-gradient(top, #6f6f6f 0%, #474747 100%);
   background: linear-gradient(top, #6f6f6f 0%, #474747 100%);
-  border: 1px solid #6f6f6f;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
+  border: 1px solid #6f6f6f;
   color: #f0f0f0;
   font-size: 18px;
   height: 30px;
@@ -534,7 +565,7 @@ input[type="checkbox"] {
   text-transform: lowercase;
 }
 
-/* line 333 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 350 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 .btn:hover {
   -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.40);
   -moz-box-shadow: 1px 1px 2px rgba(0,0,0,0.40);
@@ -545,31 +576,31 @@ input[type="checkbox"] {
   background: linear-gradient(top, #898989 0%, #616161 100%);
 }
 
-/* line 336 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 353 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 .btn:active {
   position: relative;
   top: 1px;
 }
 
-/* line 342 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 359 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 body {
   background: url("/images/background.png") repeat;
 }
 
-/* line 347 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 364 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 .container {
   margin: 0 auto;
   width: 1000px;
 }
 
-/* line 350 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 367 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 
-/* line 351 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 368 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 .container#main header#main-header {
   margin: 20px 0;
 }
 
-/* line 353 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 370 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 .container #content {
   background: url("/images/bg-content.png") repeat #fff;
   clear: both;
@@ -584,19 +615,24 @@ body {
   border-radius: 8px;
 }
 
-/* line 361 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
-.container #content article {
+/* line 378 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+.container #content > article {
   padding: 60px 0 60px 60px;
   float: left;
-  width: 545px;
+  width: 535px;
 }
 
-/* line 365 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
-.container #content article p {
+/* line 382 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+.container #content > article > header > h1 {
+  float: left;
+}
+
+/* line 384 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+.container #content > article p {
   margin-top: 5px;
 }
 
-/* line 367 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 386 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 .container #content aside#sidebar {
   -moz-border-radius-topright: 8px;
   -webkit-border-top-right-radius: 8px;
@@ -606,59 +642,63 @@ body {
   width: 245px;
 }
 
-/* line 372 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 391 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 
-/* line 373 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
-.container #content aside#sidebar p:first-child,
-.container #content aside#sidebar h3:first-child {
+/* line 392 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+.container #content aside#sidebar > p:first-child,
+.container #content aside#sidebar > h3:first-child {
   margin-top: 0;
 }
 
-/* line 375 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 394 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 .container #content .sign-up {
   position: absolute;
   top: 15px;
   right: -125px;
 }
 
-/* line 382 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
-
-/* line 383 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
-header#main-header nav {
+/* line 401 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+nav.horiz {
   float: right;
   margin-top: 30px;
 }
 
-/* line 386 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
-header#main-header nav li {
+/* line 404 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+nav.horiz li {
   float: left;
+  margin-left: 20px;
 }
 
-/* line 388 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
-header#main-header nav a,
-header#main-header nav a:visited {
+/* line 407 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+nav.horiz a,
+nav.horiz a:visited {
   color: #464646;
   display: block;
   font-size: 18px;
-  margin: 0 15px;
   text-decoration: none;
 }
 
-/* line 394 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
-header#main-header nav a:hover,
-header#main-header nav a:visited:hover {
+/* line 412 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+nav.horiz a:hover,
+nav.horiz a:visited:hover {
   color: #7ba845;
 }
 
-/* line 398 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 415 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+#content > article > header nav {
+  float: left;
+  margin-top: 13px;
+}
 
-/* line 399 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 421 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+
+/* line 422 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 body.home #content {
   padding-top: 370px;
   background: url("/images/home-header.jpg") no-repeat top center #fff;
 }
 
-/* line 402 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 425 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 body.home #content article {
   -moz-border-radius-topleft: 6px;
   -webkit-border-top-left-radius: 6px;
@@ -679,7 +719,7 @@ body.home #content article {
   float: none;
 }
 
-/* line 410 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 433 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 body.home #content article section {
   position: relative;
   background: url("/images/sprite-home.png") no-repeat;
@@ -687,7 +727,7 @@ body.home #content article section {
   height: 260px;
 }
 
-/* line 415 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 438 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 body.home #content article section h2 {
   line-height: 60px;
   margin: 0 0 -10px;
@@ -695,13 +735,13 @@ body.home #content article section h2 {
   font-size: 22px;
 }
 
-/* line 420 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 443 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 body.home #content article section p {
   font-size: 18px;
   margin: 0;
 }
 
-/* line 423 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 446 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 body.home #content article section#works-anywhere {
   background-position: 15px 0px;
   border-right: 1px solid #dfdfdf;
@@ -710,7 +750,7 @@ body.home #content article section#works-anywhere {
   z-index: 1;
 }
 
-/* line 429 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 452 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 body.home #content article section#feels-natural {
   background-position: -275px 0px;
   border-right: 1px solid #dfdfdf;
@@ -720,7 +760,7 @@ body.home #content article section#feels-natural {
   z-index: 2;
 }
 
-/* line 436 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 459 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 body.home #content article section#cloud-platform {
   background-position: -610px 0px;
   margin-left: -35px;
@@ -729,39 +769,75 @@ body.home #content article section#cloud-platform {
   z-index: 3;
 }
 
-/* line 444 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
-form#login,
-form#signup,
-form#recover {
-  margin-top: 45px;
+/* line 467 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+
+/* line 468 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+body.features .features-text {
+  background: url("/images/big-world.jpg") no-repeat top right;
+  padding-right: 250px;
 }
 
-/* line 449 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 471 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 
-/* line 450 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
-form#recover label,
-form#recover input {
-  margin-left: 55px;
+/* line 472 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+body.features aside#sidebar nav.sidenav {
+  margin-top: 40px;
 }
 
-/* line 453 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
-form#recover label {
-  display: block;
-  margin-bottom: 5px;
-  text-align: left;
-  width: 400px;
+/* line 474 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+body.features aside#sidebar nav.sidenav div.subpage {
+  margin-bottom: 20px;
 }
 
-/* line 458 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
-form#recover .error-message {
-  left: 55px;
-  top: 60px;
+/* line 476 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+body.features aside#sidebar nav.sidenav div.subpage .icon {
+  background: url("/images/sprite-features.png") no-repeat;
+  float: left;
+  height: 60px;
+  width: 60px;
 }
 
-/* line 463 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 481 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+body.features aside#sidebar nav.sidenav div.subpage .text {
+  float: left;
+  margin-left: 10px;
+}
+
+/* line 484 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+body.features aside#sidebar nav.sidenav div.subpage .text h3 {
+  margin: 10px 0 0 0;
+}
+
+/* line 486 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+body.features aside#sidebar nav.sidenav div.subpage .text p {
+  margin: 0;
+}
+
+/* line 489 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+
+/* line 490 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+body.features aside#sidebar nav.sidenav div.subpage.works-anywhere .icon {
+  background-position: 0 0;
+}
+
+/* line 492 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+
+/* line 493 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+body.features aside#sidebar nav.sidenav div.subpage.feels-natural .icon {
+  background-position: -87px 0;
+}
+
+/* line 495 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+
+/* line 496 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+body.features aside#sidebar nav.sidenav div.subpage.cloud-platform .icon {
+  background-position: -175px 0;
+}
+
+/* line 500 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 @media only screen and (min-width: 35em) {
 
-/* line 464 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 501 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
   .ir {
     display: block;
     border: 0;
@@ -774,18 +850,18 @@ form#recover .error-message {
     *line-height: 0;
   }
 
-/* line 475 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 512 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
   .ir br {
     display: none;
   }
 
-/* line 478 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 515 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
   .hidden {
     display: none;
     visibility: hidden;
   }
 
-/* line 482 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 519 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
   .visuallyhidden {
     border: 0;
     clip: rect(0 0 0 0);
@@ -797,7 +873,7 @@ form#recover .error-message {
     width: 1px;
   }
 
-/* line 492 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 529 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
   .visuallyhidden.focusable:active,
   .visuallyhidden.focusable:focus {
     clip: auto;
@@ -808,33 +884,33 @@ form#recover .error-message {
     width: auto;
   }
 
-/* line 500 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 537 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
   .invisible {
     visibility: hidden;
   }
 
-/* line 503 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 540 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
   .clearfix:before,
   .clearfix:after {
     content: "";
     display: table;
   }
 
-/* line 507 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 544 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
   .clearfix:after {
     clear: both;
   }
 
-/* line 510 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 547 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
   .clearfix {
     *zoom: 1;
   }
 }
 
-/* line 513 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 550 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
 @media print {
 
-/* line 514 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 551 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
   * {
     background: transparent;
     color: #000;
@@ -846,58 +922,58 @@ form#recover .error-message {
     -ms-filter: none;
   }
 
-/* line 522 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 559 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
   a,
   a:visited {
     text-decoration: underline;
   }
 
-/* line 525 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 562 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
   a[href]:after {
     content: " (" attr(href) ")";
   }
 
-/* line 528 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 565 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
   abbr[title]:after {
     content: " (" attr(title) ")";
   }
 
-/* line 531 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 568 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
   .ir a:after,
   a[href^="javascript:"]:after,
   a[href^="#"]:after {
     content: "";
   }
 
-/* line 534 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 571 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
   pre,
   blockquote {
     border: 1px solid #999;
     page-break-inside: avoid;
   }
 
-/* line 538 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 575 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
   thead {
     display: table-header-group;
   }
 
-/* line 541 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 578 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
   tr,
   img {
     page-break-inside: avoid;
   }
 
-/* line 544 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 581 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
   img {
     max-width: 100%;
   }
 
-/* line 547 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 584 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
   @page {
     margin: 0.5cm;
   }
 
-/* line 550 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 587 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
   p,
   h2,
   h3 {
@@ -905,7 +981,7 @@ form#recover .error-message {
     widows: 3;
   }
 
-/* line 554 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
+/* line 591 : /Users/anthonysessa/Sites/clients/code/developer.dekko.co/public/css/style.css */
   h2,
   h3 {
     page-break-after: avoid;

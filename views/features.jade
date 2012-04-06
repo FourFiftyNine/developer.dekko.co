@@ -1,11 +1,49 @@
 -locals.title = 'Features'
 article
-    nav
-        h1 Features
-        ul
-            li.works_anywhere
-                a(title="works anywhere", href="/features/anywhere") works anywhere
-            li.feels_natural
-                a(title="feels natural", href="/features/natural") feels natural
-            li.cloud_platform
-                a(title="cloud platform", href="/features/cloud") cloud platform
+  header.clearfix
+    h1 Features
+    nav.horiz
+      ul
+        li.works-anywhere
+            a(title="works anywhere", href="/features/anywhere") works anywhere
+        li.feels-natural
+            a(title="feels natural", href="/features/natural") feels natural
+        li.cloud-platform
+            a(title="cloud platform", href="/features/cloud") cloud platform
+  .features-text
+    h2 Works Anywhere
+    p 
+      | Cras a ipsum eu felis cursus hendrerit id sed est. Praesent tristique sodales nisl eu molestie. Nam elit purus, vulputate eu egestas sit amet, lobortis quis sem. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer sed nibh quis lacus pellentesque 
+    .subtext  
+      h3 Sub Heading
+      p 
+        | Nulla rutrum, quam eget feugiat lacinia, sapien libero commodo orci, eget gravida ipsum enim in est. Suspendisse orci orci, tincidunt et luctus at, laoreet eu mauris.
+      h3 Sub Heading
+      p 
+        | Nulla rutrum, quam eget feugiat lacinia, sapien libero commodo orci, eget gravida ipsum enim in est. Suspendisse orci orci, tincidunt et luctus at, laoreet eu mauris.
+//- --------------
+  Sidebar
+//- --------------
+aside#sidebar
+  p 
+    | Sign up and join <br> our developer program
+  a(title="Partnership enquires", href="TODO") Partnership enquires
+  nav.sidenav
+    .subpage.works-anywhere.clearfix
+      .icon
+      .text
+        h3 Works Anywhere
+        p Blar
+        a(title="Learn More", href="/features/works-anywhere") Learn More
+    .subpage.feels-natural.clearfix
+      .icon
+      .text
+        h3 Feels Natural
+        p Blar
+        a(title="Learn More", href="/features/feels-natural") Learn More
+    .subpage.cloud-platform.clearfix
+      .icon
+      .text
+        h3 Cloud Platform
+        p Blar
+        a(title="Learn More", href="/features/cloud-platform") Learn More

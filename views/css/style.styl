@@ -246,6 +246,8 @@ body
 h2
   font-family: 'Uni-Sans-Book'
   font-size: 28px
+  margin-top: 35px
+  margin-bottom: 10px
 h3
   color: dark_grey
   font-family: 'Uni-Sans-Bold'
@@ -265,6 +267,25 @@ a:hover
 a:active
   position relative
   top 1px
+
+//// Forms
+form#login,
+form#signup,
+form#recover
+  margin-top: 45px
+
+form#recover
+  label,
+  input
+    margin-left: 55px
+  label
+    display: block
+    margin-bottom: 5px
+    text-align: left
+    width: 400px
+  .error-message
+    left: 55px
+    top: 60px
 
 //// inputs
 .field
@@ -288,13 +309,13 @@ input
   &[type="email"]
   &[type="password"]
     background: #ffffff
-    border: 1px solid #b2b2b2
     border-radius: 6px
+    border: 1px solid #b2b2b2
+    box-shadow: 0px 1px 3px 0 rgba(0,0,0, .6) inset
     height: 27px
     line-height: 26px
     outline: none
     padding: 0 5px
-    box-shadow: 0px 1px 3px 0 rgba(0,0,0, .6) inset
     width: 310px
   &.invalid-input
     border-width: 2px
@@ -305,10 +326,6 @@ input
   &[type="submit"]
   &[type="checkbox"]
     margin-left: 145px // label width + margin
-
-
-
-
 
 ////// inputs > Errors (Validation)
 .error-message
@@ -321,8 +338,8 @@ input
 
 .btn
   background: linear-gradient(top, #6f6f6f, #474747)
-  border: 1px solid #6f6f6f
   border-radius: 6px
+  border: 1px solid #6f6f6f
   color: #f0f0f0
   font-size: 18px
   height: 30px
@@ -358,10 +375,12 @@ body
     position: relative
     box-shadow: 0px 2px 5px 0 rgba(153,153,153, .8)
     border-radius: 8px
-    article
+    > article
       padding: 60px 0 60px 60px
       float: left;
-      width: 545px
+      width: 535px
+      > header > h1
+        float: left
       p
         margin-top: 5px
     aside#sidebar
@@ -369,7 +388,7 @@ body
       float: right
       padding: 70px 30px 70px
       width: 245px
-      p,h3
+      > p, > h3
         &:first-child
           margin-top: 0
     .sign-up
@@ -378,23 +397,27 @@ body
       right: -125px;
 
 
-//// Main Navigation
-header#main-header
-  nav
-    float: right
-    margin-top: 30px
-    li
-      float: left
-    a,a:visited
-      color: #464646
-      display: block
-      font-size: 18px
-      margin: 0 15px
-      text-decoration: none
-      &:hover
-        color: green
+//// horizontal navigation
+nav.horiz
+  float: right
+  margin-top: 30px
+  li
+    float: left
+    margin-left: 20px
+  a,a:visited
+    color: #464646
+    display: block
+    font-size: 18px
+    text-decoration: none
+    &:hover
+      color: green
 
-//// Home
+#content > article > header nav
+  float: left
+  margin-top: 13px
+
+
+//// [page] home 
 body.home
   #content
     padding-top 370px
@@ -440,24 +463,38 @@ body.home
           width: 205px
           z-index: 3
 
-//// Forms
-form#login,
-form#signup,
-form#recover
-  margin-top: 45px
+//// [page] features  
+body.features
+  .features-text
+    background: url(/images/big-world.jpg) no-repeat top right
+    padding-right: 250px
+  aside#sidebar
+    nav.sidenav
+      margin-top: 40px
+      div.subpage
+        margin-bottom: 20px
+        .icon
+          background: url(/images/sprite-features.png) no-repeat
+          float: left
+          height: 60px
+          width: 60px
+        .text
+          float: left
+          margin-left: 10px
+          h3
+            margin: 10px 0 0 0
+          p
+            margin: 0
 
-form#recover
-  label,
-  input
-    margin-left: 55px
-  label
-    display: block
-    margin-bottom: 5px
-    text-align: left
-    width: 400px
-  .error-message
-    left: 55px
-    top: 60px
+        &.works-anywhere
+          .icon
+            background-position: 0 0          
+        &.feels-natural
+          .icon
+            background-position: -87px 0
+        &.cloud-platform
+          .icon
+            background-position: -175px 0
 // End App Styles
 
 @media only screen and (min-width: 35em)
