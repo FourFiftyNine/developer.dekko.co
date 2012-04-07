@@ -15,5 +15,5 @@ node_modules
 npm-debug.log
 
 # ignore compiled style.css
-public/style.css
-public/app.css
+public/css/style.css
+public/css/app.css
