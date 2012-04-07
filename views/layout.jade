@@ -35,7 +35,7 @@ html(class='no-js', lang='en')
               li.features
                 a(title="features", href="/features") features
               li.documentation
-                a(, href="/docs") documentation & tools
+                a(title="documentations & tools", href="/docs") documentation & tools
               li.support
                 a(title="support", href="/support") support
               li.login
@@ -44,7 +44,8 @@ html(class='no-js', lang='en')
           != body
           a.sign-up(title="Sign Up", href="/sign-up")
             img(src="/images/btn-sign-up.png")
-        - if (locals.body_class == 'home')
+        //- - if (locals.body_class == 'home')
+        - if(false)
           footer#news.container
             img(src="/images/temp-news.png")
             span#show-footer In the news
@@ -81,6 +82,8 @@ html(class='no-js', lang='en')
             li#facebook-link
               a(title="Like us on Facebook", href="https://twitter.com/dekkoteam", target="_blank")
                 | <span></span>like us
+        #tagline &copy; 2011 -2012 Dekko Inc. Made with an attitude of "How hard can it be?" in SoMA, California. Legals
+                
     script(src='//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
     script window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\\/script>')
 

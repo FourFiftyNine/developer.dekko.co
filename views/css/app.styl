@@ -336,7 +336,6 @@ input
   top: 35px // input box + spacing
 
 ////// inputs > button styles
-
 .btn
   background: #474747
   background: linear-gradient(top, #6f6f6f, #474747)
@@ -361,6 +360,9 @@ input
 body
   background: url(/images/background.png) repeat
 
+#main
+  position: relative
+  left: -30px // Centers content for 940px
 
 ////// layout > General padding and structure (home gets separate styles)
 .container
@@ -404,7 +406,30 @@ body
       top: 15px;
       right: -125px;
 
-//// footer
+//// horizontal navigation
+nav.horiz
+  float: right
+  margin-top: 30px
+  li
+    float: left
+    margin-left: 20px
+  a,a:visited
+    color: #464646
+    display: block
+    font-size: 18px
+    text-decoration: none
+    &:hover
+      color: green
+
+#content > article > header nav
+  float: left
+  margin-top: 13px
+
+
+//// footer (sticky)
+////// footer nav
+////// social nav
+////// tagline
 html,
 body
     height: 100%
@@ -416,11 +441,15 @@ footer#main-footer
   position: relative
   clear: both
   height: 175px
+  .container
+    width: 940px
   nav
     float: left
     margin-top: 20px
     font-size: 18px
     li
+      &:first-child
+        margin-left: 0
       a
         color: light_grey
         &:hover
@@ -456,26 +485,13 @@ footer#main-footer
         a:hover
           span
             background-position: 0 -30px
-
-//// horizontal navigation
-nav.horiz
-  float: right
-  margin-top: 30px
-  li
-    float: left
-    margin-left: 20px
-  a,a:visited
-    color: #464646
-    display: block
-    font-size: 18px
-    text-decoration: none
-    &:hover
-      color: green
-
-#content > article > header nav
-  float: left
-  margin-top: 13px
-
+  #tagline
+    bottom: -95px
+    clear: both
+    color: light_grey
+    font-size: 15px
+    left: 0px
+    position: relative
 
 //// [page] home 
 body.home
