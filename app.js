@@ -110,10 +110,58 @@ function get_state(req,res) {
   // console.log(req);
   // This seems to act as a before render dispatch - in any case need to have a way to set the title via the res.render() method
   
-  // View variable object - keeps them out of global namespace
+  // TODO need to move all of this into a module
+  var header_navigation = {
+    features: {
+      uri : '/features/works-anywhere',
+      url : 'features',
+      title : 'features',
+      isActive: S(req.route.path).contains('features')
+    },
+    docs: {
+      uri : '/docs',
+      url : 'docs',
+      title : 'documentation & tools',
+      isActive: S(req.route.path).contains('docs')
+    },
+    support: {
+      uri : '/support',
+      url : 'support',
+      title : 'support',
+      isActive: S(req.route.path).contains('support')
+    },
+    login: {
+      uri : '/login',
+      url : 'login',
+      title : 'login',
+      isActive: S(req.route.path).contains('login')
+    }
+  }
 
+  var features_navigation = {
+    works_anywhere: {
+      uri : '/features/works-anywhere',
+      url : 'works-anywhere',
+      title : 'works anywhere',
+      isActive: S(req.route.path).contains('works-anywhere')
+    },
+    feels_natural: {
+      uri : '/features/feels-natural',
+      url : 'feels-natural',
+      title : 'feels natrual',
+      isActive: S(req.route.path).contains('feels-natural')
+    },
+    cloud_platform: {
+      uri : '/features/cloud-platform',
+      url : 'cloud-platform',
+      title : 'cloud platform',
+      isActive: S(req.route.path).contains('cloud-platform')
+    }
+  }
   var locals = {
-    body_class: (req.route.path === '/') ? 'home' : S(req.route.path).replaceAll('/', ' ').ltrim().s
+    body_class: (req.route.path === '/') ? 'home' : S(req.route.path).replaceAll('/', ' ').ltrim().s,
+    header_navigation: header_navigation,
+    features_navigation: features_navigation
   }
 
   // css selector cannot start with an integer
@@ -121,7 +169,6 @@ function get_state(req,res) {
   if(locals.body_class == "404")
     locals.body_class = "error-404";
 
-  // console.log(S('/docs/unity_reference').dasherize().s);
   // TODO
   // i am not happy with this callback approach to setting state
   // i think a better way is to have a function we call for all render requests and pass it a hash; so we can tack on special variables
@@ -386,11 +433,18 @@ app.get('/support', function(req,res) { res.render('support', get_state(req,res)
 app.get('/get_the_app', function(req,res) { res.render('get_the_app', get_state(req,res) ) });
 app.get('/developer_program', function(req,res) { res.render('developer_program', get_state(req,res) ) });
 
-app.get('/benefits', function(req,res) { res.render('benefits/benefits', get_state(req,res) ) });
-app.get('/benefits/works_anywhere', function(req,res) { res.render('benefits/works_anywhere', get_state(req,res) ) });
-app.get('/benefits/natural_interaction', function(req,res) { res.render('benefits/natural_interaction', get_state(req,res)) });
-app.get('/benefits/cloud_platform', function(req,res) { res.render('benefits/cloud_platform', get_state(req,res)) });
+// TODO remove
+// app.get('/benefits', function(req,res) { res.render('benefits/benefits', get_state(req,res) ) });
+// app.get('/benefits/works_anywhere', function(req,res) { res.render('benefits/works_anywhere', get_state(req,res) ) });
+// app.get('/benefits/natural_interaction', function(req,res) { res.render('benefits/natural_interaction', get_state(req,res)) });
+// app.get('/benefits/cloud_platform', function(req,res) { res.render('benefits/cloud_platform', get_state(req,res)) });
 
-app.get('/features', function(req,res) { res.render('features', get_state(req,res) ); });
+// Features
+app.get('/features', function(req,res) { res.render('features/works_anywhere', get_state(req,res) ); });
+app.get('/features/works-anywhere', function(req,res) { res.render('features/works_anywhere', get_state(req,res) ); });
+app.get('/features/feels-natural', function(req,res) { res.render('features/feels_natural', get_state(req,res) ); });
+app.get('/features/cloud-platform', function(req,res) { res.render('features/cloud_platform', get_state(req,res) ); });
+
+
 app.get('/', function(req,res) { res.render('index', get_state(req,res) ); });
 app.get('/404', function(req, res) { res.render('404', get_state(req,res) ); });

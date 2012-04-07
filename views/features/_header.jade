@@ -1,0 +1,8 @@
+header.clearfix
+  h1 Features
+  nav.horiz
+    ul
+      - each item in features_navigation
+         - var activeClass = (item.isActive) ? item.url + ' active' : item.url;
+         li(class="#{activeClass}")
+           a(href="#{item.uri}", title="#{item.title}") #{item.title}
