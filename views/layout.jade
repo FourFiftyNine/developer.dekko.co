@@ -21,7 +21,7 @@ html(class='no-js', lang='en')
     link(rel='apple-touch-icon', href='/apple-touch-icon.png')
     link(rel='stylesheet', href='/fonts/sugar_pie/sugar_pie.css')
     link(rel='stylesheet', href='/fonts/uni_sans/uni_sans.css')
-    link(rel='stylesheet', href='/css/style.css')
+    link(rel='stylesheet', href='/css/app.css')
    
     script(src='js/libs/modernizr-2.5.3.min.js')
 
@@ -53,9 +53,34 @@ html(class='no-js', lang='en')
             //- .logo.name-3
             //- .logo.name-4
             //- .logo.name-5
-            //- .logo.name-6
+            //- .logo.name-
+        .push.clearfix
     footer#main-footer
-
+      .container
+        nav.horiz
+          ul.menu
+            li.home
+              a(title="features", href="http://dekko.co") home
+            li.about
+              a(, href="http://dekko.co/about") about
+            li.developer
+              a(title="developer", href="http://developer.dekko.co") developer
+            li.login
+              a(title="press", href="http://dekko.co/press") press
+            li.login
+              a(title="jobs", href="http://dekko.co/jobs") jobs
+            li.login
+              a(title="blog", href="http://dekko.co/blog") blog
+            li.login
+              a(title="contact", href="http://dekko.co/contact") contact
+        nav#social
+          ul.menu
+            li#twitter-link
+              a(title="Follow Us on Twitter", href="https://twitter.com/dekkoteam", target="_blank")
+                | <span></span>follow us
+            li#facebook-link
+              a(title="Like us on Facebook", href="https://twitter.com/dekkoteam", target="_blank")
+                | <span></span>like us
     script(src='//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
     script window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\\/script>')
 
@@ -69,7 +94,6 @@ html(class='no-js', lang='en')
       (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
       g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
       s.parentNode.insertBefore(g,s)}(document,'script'));
-    
         
     //if lt IE 7
       script(src='//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js', defer)

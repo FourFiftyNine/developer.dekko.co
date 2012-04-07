@@ -20,6 +20,10 @@ var sanitize = require('validator').sanitize;
 
 var app = module.exports = express.createServer();
 
+
+// app.dynamicHelpers(
+// );
+
 app.configure(function() {
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
@@ -35,6 +39,7 @@ app.configure(function() {
   app.use(require('stylus').middleware({
       src: __dirname + '/views',
       dest: __dirname + '/public',
+      debug: true,
       compile: compile
   }));
 
@@ -42,7 +47,6 @@ app.configure(function() {
   function compile(str, path) {
     return stylus(str)
       .set('linenos', true)
-      .set('debug', true)
       .set('filename', 'public/css/style.css')
       .use(nib())
       .import('nib');

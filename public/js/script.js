@@ -12,7 +12,7 @@ jQuery(document).ready(function($) {
     // })
     $('#show-footer').click(function() {
         $("footer#news").animate({
-            marginTop: "-10px"
+            marginTop: "-70px"
         }, 1000, 'easeOutCubic')
     })
     
