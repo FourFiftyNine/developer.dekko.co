@@ -79,8 +79,12 @@ html(class='no-js', lang='en')
               a(title="Like us on Facebook", href="https://twitter.com/dekkoteam", target="_blank")
                 | <span></span>like us
         #tagline &copy; 2011 -2012 Dekko Inc. Made with an attitude of "How hard can it be?" in SoMA, California. Legals
-                
-    script(src='//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
+        #newsletter
+          input#email(type="email", placeholder="email")
+          input#email-submit.btn(type="submit", value="newsletter")
+          img.ajax-gif(src="/images/ajax-loader.gif")
+
+    script(src='//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js')
     script window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\\/script>')
 
     script(src='/js/libs/jquery.easing.1.3.js')

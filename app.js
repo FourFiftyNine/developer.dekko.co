@@ -64,6 +64,21 @@ app.configure('production', function() {
   app.use(express.errorHandler());
 });
 
+
+// api.campaigns({ start: 0, limit: 25 }, function (data) {
+//     if (data.error)
+//         console.log('Error: '+data.error+' ('+data.code+')');
+//     else
+//         console.log(JSON.stringify(data)); // Do something with your data!
+// });
+
+// api.campaignStats({ cid : '/* CAMPAIGN ID */' }, function (data) {
+//     if (data.error)
+//         console.log('Error: '+data.error+' ('+data.code+')');
+//     else
+//         console.log(JSON.stringify(data)); // Do something with your data!
+// });
+
 ////////////////////////////////////////////////////////////////////////////////
 // database
 ////////////////////////////////////////////////////////////////////////////////
@@ -433,6 +448,31 @@ app.get('/support', function(req,res) { res.render('support', get_state(req,res)
 app.get('/get_the_app', function(req,res) { res.render('get_the_app', get_state(req,res) ) });
 app.get('/developer_program', function(req,res) { res.render('developer_program', get_state(req,res) ) });
 
+// Mailchimp email submit
+// TODO separate out into helper module?
+app.get('/mailchimp_submit', function(req, res) {
+  var MailChimpAPI = require('mailchimp').MailChimpAPI;
+  // Create enviromental aware configration options
+  var api_key = 'a2c240e07acd58ee7b00c2ea9b4751af-us4'; // my test api key
+  var list_id = '23fa1605c3'; // My test email list
+
+  try { 
+      var api = new MailChimpAPI(api_key, { version : '1.3', secure : false });
+  } catch (error) {
+      console.log('Error: ' + error);
+  }
+
+  api.listSubscribe({
+    id: list_id, 
+    email_address: req.query.email}, 
+    function (data) {
+      if (data.error) {
+        res.send(data);
+      } else {
+        res.send(data);
+      }
+  });
+}) 
 // TODO remove
 // app.get('/benefits', function(req,res) { res.render('benefits/benefits', get_state(req,res) ) });
 // app.get('/benefits/works_anywhere', function(req,res) { res.render('benefits/works_anywhere', get_state(req,res) ) });
