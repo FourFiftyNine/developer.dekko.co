@@ -1,0 +1,31 @@
+-locals.title = 'Recover your password'
+article
+  h1 Welcome home
+  h3 Your developer key is #{devkey}
+
+  h3 Recent activity on your app 
+
+  for item in recent_activity
+    - art = "https://graph.facebook.com/"+item.fbid+"/picture?type=small"
+    img(src=art)
+    #{item.email}
+    #{item.name}
+    br
+
+aside#sidebar
+  h3 Recent activity
+  nav
+    ul
+      li List item 1
+      li List item 2
+      li List item 3
+
+  h3 List of Links
+  nav
+    ul
+      li
+        a(title="Download 1", href="TODO") Link List Item 1
+      li
+        a(title="Download 1", href="TODO") Link List Item 2
+      li
+        a(title="Download 1", href="TODO") Link List Item 3

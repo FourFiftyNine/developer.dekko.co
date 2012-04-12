@@ -9,7 +9,8 @@ article
     .field.input
       label(for="password") Password
       input(type="password", name="password", id="password", class="invalid-input")
-      .error-message Invalid Password
+      - if(locals.user_message_status)
+        .error-message Please enter a valid email or password or <a href="/profile/recover">recover</a> your password</a>
     .field.checkbox
       input(type="checkbox", name="remember", id="remember", value="test")
       label(for="remember") Remember my email on this computer

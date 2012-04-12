@@ -2,7 +2,7 @@
 article
   h1 Sign Up
 
-  form(method="post", id="login", action="/profile/login")
+  form(method="post", id="login", action="/profile/sign-up")
     .field.input
       label(for="email") Your Email
       input(type="email", name="email", id="email")
@@ -12,7 +12,8 @@ article
     .field.input
       label(for="confirm_password") Confirm Password
       input(type="password", name="confirm_password", id="confirm_password", class="invalid-input")
-      .error-message Passwords dont match
+      - if(locals.user_message_status)
+        .error-message Please enter a valid email and password and make sure passwords match
     .field.checkbox
       input(type="checkbox", name="remember", id="remember", value="test")
       label(for="remember") Yes , I agree to Dekko's terms and conditions
