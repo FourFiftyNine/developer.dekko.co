@@ -40,6 +40,15 @@ MongoDB.prototype.find_all_by = function(hash,callback) {
   });
 };
 
+MongoDB.prototype.count_all_by = function(hash,callback) {
+  this.getCollection(function(error, mycollection) {
+    if( error ) callback(error,0)
+    else {
+      mycollection.find(hash).count(callback);
+    }
+  });
+};
+
 MongoDB.prototype.find_one_by_id = function(id, callback) {
   this.getCollection(function(error, mycollection) {
     if( error ) callback(error)

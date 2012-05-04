@@ -8,9 +8,11 @@ article
       input(type="email", name="email", id="email")
     .field.input
       label(for="password") Password
-      input(type="password", name="password", id="password", class="invalid-input")
       - if(locals.user_message_status)
+        input(type="password", name="password", id="password", class="invalid-input")
         .error-message Please enter a valid email or password or <a href="/profile/recover">recover</a> your password</a>
+      - else
+        input(type="password", name="password", id="password")
     .field.checkbox
       input(type="checkbox", name="remember", id="remember", value="test")
       label(for="remember") Remember my email on this computer

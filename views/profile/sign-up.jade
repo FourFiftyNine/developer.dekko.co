@@ -7,37 +7,22 @@ article
       label(for="email") Your Email
       input(type="email", name="email", id="email")
     .field.input
+      label(for="organization") Your Company / Organization
+      input(type="organization", name="organization", id="organization")
+    .field.input
       label(for="password") Password
       input(type="password", name="password", id="password")
     .field.input
       label(for="confirm_password") Confirm Password
-      input(type="password", name="confirm_password", id="confirm_password", class="invalid-input")
       - if(locals.user_message_status)
+        input(type="password", name="confirm_password", id="confirm_password", class="invalid-input")
         .error-message Please enter a valid email and password and make sure passwords match
+      - else
+        input(type="password", name="confirm_password", id="confirm_password")
+
     .field.checkbox
       input(type="checkbox", name="remember", id="remember", value="test")
       label(for="remember") Yes , I agree to Dekko's terms and conditions
 
     input(type="submit", value="sign up", class="btn")
 
-aside#sidebar
-  h3 Why you'll love dekko
-  nav
-    ul
-      li List item 1
-      li List item 2
-      li List item 3
-  h3 Don't have an account?
-  a(title="Sign Up now!", href="/sign-up") Sign Up now!
-
-  h3 Did you forget your password?
-  a(title="Download 1", href="/recover") Recover it here.
-  h3 List of Links
-  nav
-    ul
-      li
-        a(title="Download 1", href="TODO") Link List Item 1
-      li
-        a(title="Download 1", href="TODO") Link List Item 2
-      li
-        a(title="Download 1", href="TODO") Link List Item 3

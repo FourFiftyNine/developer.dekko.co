@@ -38,9 +38,9 @@ html(class='no-js', lang='en')
                   a(href="#{item.uri}", title="#{item.title}") #{item.title}
         div(role='main', id="content").clearfix
           != body
-          a.sign-up(title="Sign Up", href="/sign-up")
-            img(src="/images/btn-sign-up.png")
-        //- - if (locals.body_class == 'home')
+          -if(locals.show_signup)
+            a.sign-up(title="Sign Up", href="/sign-up")
+              img(src="/images/btn-sign-up.png")
         - if(false)
           footer#news.container
             img(src="/images/temp-news.png")
@@ -56,12 +56,8 @@ html(class='no-js', lang='en')
       .container
         nav.horiz
           ul.menu
-            li.home
-              a(title="home", href="http://dekko.co") home
             li.about
-              a(title="about", href="http://dekko.co/about") about
-            li.developer
-              a(title="developer", href="http://developer.dekko.co") developer
+              a(title="about", href="http://dekko.co/about/vision") about
             li.login
               a(title="press", href="http://dekko.co/press") press
             li.login
@@ -76,13 +72,9 @@ html(class='no-js', lang='en')
               a(title="Follow Us on Twitter", href="https://twitter.com/dekkoteam", target="_blank")
                 | <span></span>follow us
             li#facebook-link
-              a(title="Like us on Facebook", href="https://twitter.com/dekkoteam", target="_blank")
+              a(title="Like us on Facebook", href="http://www.facebook.com/dekkoteam", target="_blank")
                 | <span></span>like us
         #tagline &copy; 2011 -2012 Dekko Inc. Made with an attitude of "How hard can it be?" in SoMA, California. Legals
-        #newsletter
-          input#email(type="email", placeholder="email")
-          input#email-submit.btn(type="submit", value="newsletter")
-          img.ajax-gif(src="/images/ajax-loader.gif")
 
     script(src='//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js')
     script window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\\/script>')

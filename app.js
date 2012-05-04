@@ -15,7 +15,15 @@ var crypto   = require('crypto');
 var bcrypt   = require('bcrypt');
 var check    = require('validator').check;
 var sanitize = require('validator').sanitize;
+var Step     = require('step');
 // var passport = require('passport') , LocalStrategy = require('passport-local').Strategy;
+// var sendmail = require('sendmail').sendmail;
+
+var mail = require('mail').Mail({
+  host: 'smtp.gmail.com',
+  username: 'anselm@dekko.co',
+  password: '34west34'
+});
 
 //////////////////////////////////////////////////////////////////////////////////
 // configure express js
@@ -95,24 +103,6 @@ locals: function(req,res) {
   // TODO this should not be recomputed each time it is called
 
   var header_navigation = {
-    features: {
-      uri : '/features/works-anywhere',
-      url : 'features',
-      title : 'features',
-      isActive: S(req.route.path).contains('features')
-    },
-    docs: {
-      uri : '/docs',
-      url : 'docs',
-      title : 'documentation & tools',
-      isActive: S(req.route.path).contains('docs')
-    },
-    support: {
-      uri : '/support',
-      url : 'support',
-      title : 'support',
-      isActive: S(req.route.path).contains('support')
-    },
     login: {
       uri : '/login',
       url : 'login',
@@ -152,6 +142,7 @@ locals: function(req,res) {
   };
 
   var locals = {
+    show_signup: req.hide_signup ? 0 : 1,
     user_message_status: req.user_message_status,
     user_message_error: req.user_message_error, 
     body_class: (req.route.path === '/') ? 'home' : S(req.route.path).replaceAll('/', ' ').ltrim().s,
@@ -183,6 +174,11 @@ devkey: function(req,res) {
 
 recent_activity: function(req,res) {
   return req.recent_activity ? req.recent_activity : [];
+},
+
+email: function(req,res) {
+  if (req.body && req.body["email"]) return req.body["email"];
+  return "";
 }
 
 }); // end
@@ -244,16 +240,47 @@ function perform_profile(req,res) {
 }
 
 //
+// render stats
+//
+//
+
+function perform_stats(req,res) {
+
+  var developers = 0;
+  var users = 0;
+  var sessions = 0;
+
+  Step(
+    function step1() {
+      mongo.count_all_by({ kind:"developer" },this);
+    },
+    function step2(err,results) {
+      developers = results;
+      mongo.count_all_by({ kind:"client" },this);
+    },
+    function step3(err,results) {
+      users = results;
+      mongo.count_all_by({ kind:"log", subkind:"facebook" },this);
+    },
+    function step4(err,results) {
+      sessions = results;
+      res.render('stats',{locals:{developers:developers,users:users,sessions:sessions}});
+    }
+  );
+
+}
+
+//
+//
 // do a login
 //
-// TODO password recovery is needed
 // TODO javascript client side dynamic validation of email would be nice too as well as error checking client side
-// TODO sanitize
 //
 
 function perform_login_signup(req,res,create_account) {
   var post = req.body;
   var email = post.email;
+  var organization = post.organization;
   var password = post.password;
 
   // TODO prefer not to have to do this explicitly; research how to find current page
@@ -315,7 +342,7 @@ function perform_login_signup(req,res,create_account) {
     var created_at = new Date();
     var updated_at = new Date();
     var devkey = crypto.createHash('md5').update(email).digest("hex");
-    var data = { kind: "developer", devkey: devkey, email: email, password: hash, created_at: created_at, updated_at: updated_at };
+    var data = { kind: "developer", devkey: devkey, organization: organization, email: email, password: hash, created_at: created_at, updated_at: updated_at };
     console.log("sign-up: saving " + data );
     mongo.save( data, function( error, results) {
 
@@ -332,6 +359,45 @@ function perform_login_signup(req,res,create_account) {
   });
 }
 
+function perform_recover_password(req,res) {
+
+  var post = req.body;
+  var email = post.email;
+
+  if (!email || !validateEmail(email)) {
+    user_message_status(req,"Email address not found");
+    res.render("profile/recover");
+    return;
+  }
+
+  console.log("recover: looking for " + email );
+  email = sanitize(email).xss();
+
+  mongo.find_one_by({ "email":email},function(error,results) {
+    if(error) { user_message_status(error_message_2); res.render(target); return; }
+    if(results) {
+      var password = results["password"];
+
+      mail.message({
+        from: 'anselm@dekko.co',
+        to: [email],
+        subject: 'Your password'
+      })
+      .body(password)
+      .send(function(err) {
+        if (err) throw err;
+        console.log('Sent!');
+      });
+      console.log("Sending out email to " + email );
+      res.render('profile/recovered');
+    } else {
+      user_message_status(req,"Email address not found");
+      res.render("profile/recover");
+    }
+  });
+
+}
+
 //
 // log facebook details if we have them
 // TODO security
@@ -344,13 +410,14 @@ function perform_session_facebook(req,res) {
   var name       = blob["name"];
   var fbid       = blob["fbid"];
   var devkey     = blob["devkey"];
+  var art        = blob["art"];
   var sessionkey = blob["sessionkey"];
   var created_at = new Date();
   var updated_at = new Date();
 
   console.log("server got a new facebook session devkey=" + devkey + " name=" + name + " email=" + email + " fbid=" + fbid );
 
-  var data = { kind:"log", subkind:"facebook", devkey: devkey, email:email, name:name, fbid:fbid, created_at: created_at, updated_at: updated_at };
+  var data = { kind:"log", subkind:"facebook", art:art, devkey: devkey, email:email, name:name, fbid:fbid, created_at: created_at, updated_at: updated_at };
   mongo.save(data,function(error,results) { console.log("server::session::facebook done " + results ); } );
 
 
@@ -458,40 +525,45 @@ console.log("Express server listening on port %d in %s mode", app.address().port
 // error messages - trying to keep them all in one place
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-var error_message_noauth = 'I did not get enough information to help you - perhaps you need to [recover](/profile/recover) a lost password or email?';
-var error_message_2 = 'Sign-on internal error #2';
-var error_message_3 = 'Sign-on internal error #3';
+var error_message_noauth =       'I did not get enough information to help you - perhaps you need to [recover](/profile/recover) a lost password or email?';
+var error_message_2 =            'Sign-on internal error #2';
+var error_message_3 =            'Sign-on internal error #3';
 var error_message_client_login = 'Client internal error #3';
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // routes for session and profile sign-up, login and management overall for developers and session playing clients
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// stats
+app.get('/stats',                function(req,res) { req.hide_signup = 1; perform_stats(req,res); });
+
 // login routes
-app.get('/login',                function(req,res) { res.render('profile/login' ) });
-app.get('/profile/login',        function(req,res) { res.render('profile/login' ) });
+app.get('/login',                function(req,res) { res.render('profile/login' ); });
+app.get('/profile/login',        function(req,res) { res.render('profile/login' ); });
 
 // recover password routes
 
-app.get('/recover',              function(req,res) { res.render('profile/recover' ) });
-app.get('/profile/recover',      function(req,res) { res.render('profile/recover' ) });
+app.get('/recover',              function(req,res) { req.hide_signup = 1; res.render('profile/recover' ); });
+app.get('/profile/recover',      function(req,res) { req.hide_signup = 1; res.render('profile/recover' ); });
+app.get('/recovered',            function(req,res) { res.hide_signup = 1; res.render('profile/recovered'); });
+app.post('/recover',             function(req,res) { req.hide_signup = 1; perform_recover_password(req,res); });
 
 // view profile
 
-app.get('/profile',              check_auth, function(req,res) { perform_profile(req,res) });
-app.get('/profile/edit',         check_auth, function(req,res) { res.render('profile/edit' ) });
-app.get('/profile/resign',       check_auth, function(req,res) { res.render('profile/resign' ) });
-app.get('/profile/analytics',    check_auth, function(req,res) { res.render('profile/analytics' ) });
-app.get('/profile/unitypackage', check_auth, function(req,res) { res.render('profile/unitypackage' ) });
+app.get('/profile',              check_auth, function(req,res) { perform_profile(req,res); });
+app.get('/profile/edit',         check_auth, function(req,res) { res.render('profile/edit' ); });
+app.get('/profile/resign',       check_auth, function(req,res) { res.render('profile/resign' ); });
+app.get('/profile/analytics',    check_auth, function(req,res) { res.render('profile/analytics' ); });
+app.get('/profile/unitypackage', check_auth, function(req,res) { res.render('profile/unitypackage' ); });
 
 // sign in out up session stuff 
 
 app.post('/profile/login',    function(req,res) { perform_login_signup(req,res,0);          });
 app.post('/profile/sign-up',  function(req,res) { perform_login_signup(req,res,1);          });
 
-app.get('/signup',            function(req,res) { res.render('profile/sign-up' )            });
-app.get('/sign-up',           function(req,res) { res.render('profile/sign-up' )            });
-app.get('/profile/sign-up',   function(req,res) { res.render('profile/sign-up' )            });
+app.get('/signup',            function(req,res) { res.render('profile/sign-up' );           });
+app.get('/sign-up',           function(req,res) { res.render('profile/sign-up' );           });
+app.get('/profile/sign-up',   function(req,res) { res.render('profile/sign-up' );           });
 
 app.get('/profile/signout',   function(req,res) { req.session.destroy(); res.redirect("/"); });
 app.get('/signout',           function(req,res) { req.session.destroy(); res.redirect("/"); });
@@ -499,11 +571,11 @@ app.get('/logout',            function(req,res) { req.session.destroy(); res.red
 
 // transitive sessions for iphone clients
 
-app.post('/session/facebook', function(req,res) { perform_session_facebook(req,res); });
-app.get('/session/facebook', function(req,res) { perform_session_facebook(req,res); });
-app.get('/session', function(req,res) { perform_session(req,res); });
+app.post('/session/facebook',        function(req,res) { perform_session_facebook(req,res); });
+app.get('/session/facebook',         function(req,res) { perform_session_facebook(req,res); });
+app.get('/session',                  function(req,res) { perform_session(req,res);          });
 app.get('/profile/session/facebook', function(req,res) { perform_session_facebook(req,res); });
-app.get('/profile/session', function(req,res) { perform_session(req,res); });
+app.get('/profile/session',          function(req,res) { perform_session(req,res);          });
 
 //
 //  server ping alive test - unused
